@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Auxiliary, Scope, FilterState } from "@/types/events";
+import { getAuxiliaryFilterColor } from "@/utils/auxiliaryColors";
 
 interface FilterBarProps {
   filters: FilterState;
@@ -27,19 +28,22 @@ export function FilterBar({ filters, onFiltersChange }: FilterBarProps) {
       <div className="space-y-2">
         <label className="text-sm font-medium text-foreground">Auxiliary</label>
         <div className="flex flex-wrap gap-2">
-          {auxiliaries.map((auxiliary) => (
-            <button
-              key={auxiliary}
-              onClick={() => updateFilter('auxiliary', auxiliary)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-smooth border min-h-[44px] ${
-                filters.auxiliary === auxiliary
-                  ? 'bg-filter-active text-primary-foreground border-filter-active'
-                  : 'bg-filter-inactive text-foreground border-divider hover:bg-muted'
-              }`}
-            >
-              {auxiliary}
-            </button>
-          ))}
+          {auxiliaries.map((auxiliary) => {
+            const isActive = filters.auxiliary === auxiliary;
+            const colorClass = auxiliary === 'All' 
+              ? (isActive ? 'bg-filter-active text-primary-foreground border-filter-active' : 'bg-filter-inactive text-foreground border-divider hover:bg-muted')
+              : getAuxiliaryFilterColor(auxiliary as Auxiliary, isActive);
+            
+            return (
+              <button
+                key={auxiliary}
+                onClick={() => updateFilter('auxiliary', auxiliary)}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-smooth border min-h-[44px] ${colorClass}`}
+              >
+                {auxiliary}
+              </button>
+            );
+          })}
         </div>
       </div>
 

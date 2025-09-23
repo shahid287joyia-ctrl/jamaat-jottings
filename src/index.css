@@ -48,7 +48,13 @@ All colors MUST be HSL.
     /* Filter & Badge Colors */
     --filter-active: 0 0% 0%;
     --filter-inactive: 0 0% 96%;
-    --badge-auxiliary: 0 0% 0%;
+    
+    /* Auxiliary Color Coding (subtle variations of black/gray) */
+    --auxiliary-atfal: 0 0% 25%;
+    --auxiliary-khuddam: 0 0% 15%;
+    --auxiliary-lajna: 0 0% 35%;
+    --auxiliary-ansar: 0 0% 5%;
+    
     --badge-scope: 0 0% 15%;
     
     /* Shadows */

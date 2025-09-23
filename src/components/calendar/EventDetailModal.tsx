@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Event } from "@/types/events";
 import { Calendar, Clock, MapPin, Share2, Download } from "lucide-react";
+import { getAuxiliaryBadgeVariant } from "@/utils/auxiliaryColors";
 
 interface EventDetailModalProps {
   event: Event | null;
@@ -111,7 +112,7 @@ export function EventDetailModal({ event, open, onClose }: EventDetailModalProps
         <DialogHeader>
           <div className="space-y-3">
             <div className="flex flex-wrap gap-2">
-              <Badge variant="auxiliary">{event.auxiliary}</Badge>
+              <Badge variant={getAuxiliaryBadgeVariant(event.auxiliary)}>{event.auxiliary}</Badge>
               <Badge variant="scope">{event.scope}</Badge>
               {event.is_sports && <Badge variant="sports">Sports</Badge>}
             </div>

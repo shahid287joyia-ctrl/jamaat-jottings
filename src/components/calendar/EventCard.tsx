@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Event } from "@/types/events";
 import { Calendar, Clock, MapPin, Share2 } from "lucide-react";
+import { getAuxiliaryBadgeVariant } from "@/utils/auxiliaryColors";
 
 interface EventCardProps {
   event: Event;
@@ -58,7 +59,7 @@ export function EventCard({ event, onEventClick }: EventCardProps) {
         {/* Header with title and badges */}
         <div className="space-y-2">
           <div className="flex flex-wrap gap-2">
-            <Badge variant="auxiliary">{event.auxiliary}</Badge>
+            <Badge variant={getAuxiliaryBadgeVariant(event.auxiliary)}>{event.auxiliary}</Badge>
             <Badge variant="scope">{event.scope}</Badge>
             {event.is_sports && <Badge variant="sports">Sports</Badge>}
           </div>

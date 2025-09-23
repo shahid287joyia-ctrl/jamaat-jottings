@@ -60,8 +60,13 @@ export default {
           active: "hsl(var(--filter-active))",
           inactive: "hsl(var(--filter-inactive))",
         },
+        auxiliary: {
+          atfal: "hsl(var(--auxiliary-atfal))",
+          khuddam: "hsl(var(--auxiliary-khuddam))",
+          lajna: "hsl(var(--auxiliary-lajna))",
+          ansar: "hsl(var(--auxiliary-ansar))",
+        },
         badge: {
-          auxiliary: "hsl(var(--badge-auxiliary))",
           scope: "hsl(var(--badge-scope))",
         },
       },
