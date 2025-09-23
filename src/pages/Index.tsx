@@ -28,13 +28,15 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-surface">
       {/* Header */}
-      <header className="bg-background border-b border-divider px-4 py-6">
+      <header className="bg-gradient-primary text-primary-foreground border-b border-divider/20 px-4 py-8 shadow-elevated">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center space-y-2">
-            <h1 className="text-2xl font-bold text-foreground">Darul Barkaat</h1>
-            <p className="text-text-subtle">Mosque Events Calendar</p>
+          <div className="text-center space-y-3">
+            <h1 className="text-3xl font-bold font-arabic">دار البركات</h1>
+            <h2 className="text-2xl font-semibold">Darul Barkaat</h2>
+            <p className="text-primary-foreground/90 text-lg">Mosque Events Calendar</p>
+            <div className="w-16 h-1 bg-primary-foreground/30 rounded-full mx-auto"></div>
           </div>
         </div>
       </header>

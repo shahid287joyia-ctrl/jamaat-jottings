@@ -65,10 +65,18 @@ export default {
           khuddam: "hsl(var(--auxiliary-khuddam))",
           lajna: "hsl(var(--auxiliary-lajna))",
           ansar: "hsl(var(--auxiliary-ansar))",
-        },
+      },
+      fontFamily: {
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'arabic': ['Amiri', 'serif'],
+      },
         badge: {
           scope: "hsl(var(--badge-scope))",
         },
+      },
+      backgroundImage: {
+        'gradient-primary': 'var(--gradient-primary)',
+        'gradient-surface': 'var(--gradient-surface)',
       },
       boxShadow: {
         card: "var(--shadow-card)",

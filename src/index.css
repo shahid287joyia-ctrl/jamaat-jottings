@@ -8,62 +8,66 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Mosque Calendar Design System - Black & White Theme */
+    /* Enhanced Mosque Calendar Design System - Rich Color Palette */
     --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 220 13% 18%;
 
-    --primary: 0 0% 0%;
+    --primary: 142 76% 36%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 220 13% 18%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 198 93% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 0%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142 76% 36%;
 
     --radius: 0.75rem;
 
     /* Custom Mosque Calendar Tokens */
-    --surface-elevated: 0 0% 98%;
-    --surface-subtle: 0 0% 96%;
-    --text-subtle: 0 0% 60%;
-    --divider: 0 0% 85%;
+    --surface-elevated: 142 76% 96%;
+    --surface-subtle: 142 30% 95%;
+    --text-subtle: 220 9% 46%;
+    --divider: 214.3 31.8% 85%;
     
     /* Filter & Badge Colors */
-    --filter-active: 0 0% 0%;
+    --filter-active: 142 76% 36%;
     --filter-inactive: 0 0% 96%;
     
-    /* Auxiliary Color Coding (subtle variations of black/gray) */
-    --auxiliary-atfal: 0 0% 25%;
-    --auxiliary-khuddam: 0 0% 15%;
-    --auxiliary-lajna: 0 0% 35%;
-    --auxiliary-ansar: 0 0% 5%;
+    /* Auxiliary Color Coding (beautiful, distinct colors) */
+    --auxiliary-atfal: 45 93% 47%;
+    --auxiliary-khuddam: 221 83% 53%;
+    --auxiliary-lajna: 267 84% 64%;
+    --auxiliary-ansar: 142 76% 36%;
     
-    --badge-scope: 0 0% 15%;
+    --badge-scope: 198 93% 60%;
     
-    /* Shadows */
-    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-    --shadow-elevated: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    /* Shadows with subtle color tints */
+    --shadow-card: 0 1px 3px 0 rgba(34, 197, 94, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-elevated: 0 4px 6px -1px rgba(34, 197, 94, 0.15), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     
-    /* Animations */
+    /* Enhanced Animations */
     --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-surface: linear-gradient(180deg, hsl(var(--background)), hsl(var(--surface-subtle)));
   }
 
   .dark {

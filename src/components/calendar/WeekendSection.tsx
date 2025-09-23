@@ -51,8 +51,10 @@ export function WeekendSection({ events, filters, onEventClick }: WeekendSection
   return (
     <div className="space-y-4">
       <div className="px-4">
-        <h2 className="text-xl font-bold text-foreground">{weekendTitle}</h2>
-        <p className="text-sm text-text-subtle">Friday - Sunday</p>
+        <div className="bg-gradient-primary text-primary-foreground p-4 rounded-xl shadow-card">
+          <h2 className="text-xl font-bold">{weekendTitle}</h2>
+          <p className="text-primary-foreground/80">Friday - Sunday</p>
+        </div>
       </div>
       
       {weekendEvents.length > 0 ? (
@@ -66,9 +68,11 @@ export function WeekendSection({ events, filters, onEventClick }: WeekendSection
           ))}
         </div>
       ) : (
-        <Card className="mx-4 p-6 text-center border border-divider">
-          <p className="text-text-subtle">No events this weekend</p>
-        </Card>
+        <div className="px-4">
+          <div className="bg-surface-elevated border border-divider p-6 text-center rounded-xl">
+            <p className="text-text-subtle">No events this weekend</p>
+          </div>
+        </div>
       )}
     </div>
   );

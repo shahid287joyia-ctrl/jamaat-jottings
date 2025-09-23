@@ -72,24 +72,27 @@ export function NamazWidget({ timings }: NamazWidgetProps) {
   }
 
   return (
-    <Card className="mx-4 p-4 border border-divider">
-      <div className="space-y-4">
+    <div className="mx-4 bg-card border border-divider/50 rounded-xl shadow-card overflow-hidden">
+      <div className="bg-gradient-primary text-primary-foreground p-4">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-semibold text-foreground">
+            <h3 className="font-semibold text-lg">
               {expanded ? "This Week's Namaz Timings" : "Today's Namaz Timings"}
             </h3>
-            <p className="text-xs text-text-subtle">Darul Barkaat (Europe/London)</p>
+            <p className="text-xs text-primary-foreground/80">Darul Barkaat (Europe/London)</p>
           </div>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setExpanded(!expanded)}
-            className="min-h-[44px]"
+            className="min-h-[44px] text-primary-foreground hover:bg-primary-foreground/10"
           >
             {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </Button>
         </div>
+      </div>
+
+      <div className="p-4 space-y-4">
 
         {!expanded && todayTiming ? (
           // Today's timings
@@ -173,6 +176,6 @@ export function NamazWidget({ timings }: NamazWidgetProps) {
           </div>
         )}
       </div>
-    </Card>
+    </div>
   );
 }
