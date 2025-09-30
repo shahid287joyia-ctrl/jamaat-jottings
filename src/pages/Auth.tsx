@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/components/ui/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -53,9 +52,8 @@ const Auth = () => {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const fullName = formData.get('fullName') as string;
-    const adminRole = formData.get('adminRole') as string;
 
-    const { error } = await signUp(email, password, fullName, adminRole);
+    const { error } = await signUp(email, password, fullName);
 
     if (error) {
       toast({
@@ -164,20 +162,6 @@ const Auth = () => {
                     placeholder="Your full name"
                     required
                   />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="adminRole">Admin Role</Label>
-                  <Select name="adminRole" required>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your role" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Sadr">Sadr</SelectItem>
-                      <SelectItem value="Murabbi">Murabbi</SelectItem>
-                      <SelectItem value="Qaid">Qaid</SelectItem>
-                      <SelectItem value="Mosque Manager">Mosque Manager</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
                 <Button
                   type="submit"

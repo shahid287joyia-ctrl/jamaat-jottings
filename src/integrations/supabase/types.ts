@@ -120,7 +120,15 @@ export type Database = {
           updated_by?: string | null
           zuhr?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "namaz_timings_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       profiles: {
         Row: {
