@@ -17,6 +17,12 @@ export function EventsList({ events, filters, onEventClick }: EventsListProps) {
         // Apply filters
         if (filters.auxiliary !== 'All' && event.auxiliary !== filters.auxiliary) return false;
         if (filters.scope !== 'All' && event.scope !== filters.scope) return false;
+        
+        // Filter by qiadat only when Local scope is selected
+        if (filters.scope === 'Local' && filters.qiadat !== 'All' && event.qiadat !== filters.qiadat) {
+          return false;
+        }
+        
         if (filters.sports_only && !event.is_sports) return false;
         
         // Only show upcoming events by default

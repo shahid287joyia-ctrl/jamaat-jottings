@@ -1,12 +1,14 @@
 export type Auxiliary = 'Atfal' | 'Khuddam' | 'Lajna' | 'Ansar';
 export type Scope = 'Local' | 'Regional' | 'National';
-export type AdminRole = 'Sadr' | 'Murabbi' | 'Qaid' | 'Mosque Manager';
+export type Qiadat = 'Solihull' | 'South' | 'West' | 'Central' | 'North' | 'Walsall' | 'Wolverhampton';
+export type AdminRole = 'Mosque Manager' | 'Local Nazim' | 'Qaid' | 'Sadar Jamaat' | 'Murabbi' | 'Other';
 
 export interface Event {
   id: string;
   title: string;
   auxiliary: Auxiliary;
   scope: Scope;
+  qiadat?: Qiadat;
   is_sports: boolean;
   start_date: string; // YYYY-MM-DD
   start_time?: string; // HH:MM
@@ -35,5 +37,6 @@ export interface NamazTiming {
 export interface FilterState {
   auxiliary: Auxiliary | 'All';
   scope: Scope | 'All';
+  qiadat: Qiadat | 'All';
   sports_only: boolean;
 }

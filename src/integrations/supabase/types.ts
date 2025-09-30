@@ -27,6 +27,7 @@ export type Database = {
           id: string
           is_sports: boolean
           location: string
+          qiadat: string | null
           recurrence_rule: string | null
           scope: Database["public"]["Enums"]["scope"]
           start_date: string
@@ -46,6 +47,7 @@ export type Database = {
           id?: string
           is_sports?: boolean
           location: string
+          qiadat?: string | null
           recurrence_rule?: string | null
           scope: Database["public"]["Enums"]["scope"]
           start_date: string
@@ -65,6 +67,7 @@ export type Database = {
           id?: string
           is_sports?: boolean
           location?: string
+          qiadat?: string | null
           recurrence_rule?: string | null
           scope?: Database["public"]["Enums"]["scope"]
           start_date?: string
@@ -133,31 +136,37 @@ export type Database = {
       profiles: {
         Row: {
           admin_role: Database["public"]["Enums"]["admin_role"]
+          aims_id: string | null
           approved: boolean
           created_at: string
           email: string
           full_name: string | null
           id: string
+          qiadat: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           admin_role: Database["public"]["Enums"]["admin_role"]
+          aims_id?: string | null
           approved?: boolean
           created_at?: string
           email: string
           full_name?: string | null
           id?: string
+          qiadat?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           admin_role?: Database["public"]["Enums"]["admin_role"]
+          aims_id?: string | null
           approved?: boolean
           created_at?: string
           email?: string
           full_name?: string | null
           id?: string
+          qiadat?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -174,7 +183,14 @@ export type Database = {
       }
     }
     Enums: {
-      admin_role: "Sadr" | "Murabbi" | "Qaid" | "Mosque Manager"
+      admin_role:
+        | "Sadr"
+        | "Murabbi"
+        | "Qaid"
+        | "Mosque Manager"
+        | "Local Nazim"
+        | "Sadar Jamaat"
+        | "Other"
       auxiliary: "Atfal" | "Khuddam" | "Lajna" | "Ansar"
       scope: "Local" | "Regional" | "National"
     }
@@ -304,7 +320,15 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      admin_role: ["Sadr", "Murabbi", "Qaid", "Mosque Manager"],
+      admin_role: [
+        "Sadr",
+        "Murabbi",
+        "Qaid",
+        "Mosque Manager",
+        "Local Nazim",
+        "Sadar Jamaat",
+        "Other",
+      ],
       auxiliary: ["Atfal", "Khuddam", "Lajna", "Ansar"],
       scope: ["Local", "Regional", "National"],
     },

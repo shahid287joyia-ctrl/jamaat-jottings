@@ -31,7 +31,7 @@ export const mockEvents: Event[] = [
     location: 'Darul Barkaat',
     description: 'Weekly taleem class.',
     recurrence_rule: 'RRULE:FREQ=WEEKLY;BYDAY=SU',
-    created_by_role: 'Sadr',
+    created_by_role: 'Mosque Manager',
     last_updated: '2025-09-23T10:05:00Z'
   },
   {
@@ -96,7 +96,7 @@ export const mockEvents: Event[] = [
     all_day: false,
     location: 'Darul Barkaat',
     description: 'Monthly regional meeting.',
-    created_by_role: 'Sadr',
+    created_by_role: 'Mosque Manager',
     last_updated: '2025-09-23T10:25:00Z'
   }
 ];

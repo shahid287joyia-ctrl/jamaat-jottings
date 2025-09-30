@@ -17,6 +17,7 @@ const Index = () => {
   const [filters, setFilters] = useState<FilterState>({
     auxiliary: 'All',
     scope: 'All',
+    qiadat: 'All',
     sports_only: false
   });
 
@@ -46,7 +47,7 @@ const Index = () => {
           </div>
         </div>
         <div className="absolute top-4 right-4">
-          <Button asChild variant="outline" size="sm" className="text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10">
+          <Button asChild variant="secondary" size="sm" className="bg-primary-foreground/20 text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/30 backdrop-blur-sm">
             <Link to="/auth" className="flex items-center gap-2">
               <Settings className="h-4 w-4" />
               Admin

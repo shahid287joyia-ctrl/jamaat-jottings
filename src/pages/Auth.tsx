@@ -5,8 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { AdminRole, Qiadat } from '@/types/events';
 
 const Auth = () => {
   const { user, signIn, signUp, loading } = useAuth();
@@ -52,8 +54,22 @@ const Auth = () => {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const fullName = formData.get('fullName') as string;
+    const adminRole = formData.get('adminRole') as AdminRole;
+    const qiadat = formData.get('qiadat') as Qiadat;
+    const aimsId = formData.get('aimsId') as string;
 
-    const { error } = await signUp(email, password, fullName);
+    // Validate AIMS ID
+    if (aimsId && !/^\d{5}$/.test(aimsId)) {
+      toast({
+        title: 'Invalid AIMS ID',
+        description: 'AIMS ID must be exactly 5 digits.',
+        variant: 'destructive',
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    const { error } = await signUp(email, password, fullName, adminRole, qiadat, aimsId);
 
     if (error) {
       toast({
@@ -64,7 +80,7 @@ const Auth = () => {
     } else {
       toast({
         title: 'Account Created!',
-        description: 'Your admin account has been created successfully.',
+        description: 'Your admin account has been created. Please wait for approval.',
       });
     }
 
@@ -160,6 +176,51 @@ const Auth = () => {
                     name="fullName"
                     type="text"
                     placeholder="Your full name"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="adminRole">Role</Label>
+                  <Select name="adminRole" required>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Mosque Manager">Mosque Manager</SelectItem>
+                      <SelectItem value="Local Nazim">Local Nazim</SelectItem>
+                      <SelectItem value="Qaid">Qaid</SelectItem>
+                      <SelectItem value="Sadar Jamaat">Sadar Jamaat</SelectItem>
+                      <SelectItem value="Murabbi">Murabbi</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="qiadat">Qiadat</Label>
+                  <Select name="qiadat" required>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your Qiadat" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Solihull">Solihull</SelectItem>
+                      <SelectItem value="South">South</SelectItem>
+                      <SelectItem value="West">West</SelectItem>
+                      <SelectItem value="Central">Central</SelectItem>
+                      <SelectItem value="North">North</SelectItem>
+                      <SelectItem value="Walsall">Walsall</SelectItem>
+                      <SelectItem value="Wolverhampton">Wolverhampton</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="aimsId">AIMS ID (5 digits)</Label>
+                  <Input
+                    id="aimsId"
+                    name="aimsId"
+                    type="text"
+                    placeholder="12345"
+                    maxLength={5}
+                    pattern="\d{5}"
                     required
                   />
                 </div>
