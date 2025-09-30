@@ -226,6 +226,7 @@ interface EventFormProps {
 
 const EventForm = ({ onSubmit, event }: EventFormProps) => {
   const [selectedScope, setSelectedScope] = useState<Scope | undefined>(event?.scope);
+  const [selectedQiadat, setSelectedQiadat] = useState<Qiadat | undefined>(event?.qiadat);
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -288,7 +289,12 @@ const EventForm = ({ onSubmit, event }: EventFormProps) => {
         {selectedScope === 'Local' && (
           <div className="space-y-2">
             <Label htmlFor="qiadat">Qiadat</Label>
-            <Select name="qiadat" defaultValue={event?.qiadat} required>
+            <Select 
+              name="qiadat" 
+              value={selectedQiadat} 
+              onValueChange={(value) => setSelectedQiadat(value as Qiadat)}
+              required
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select qiadat" />
               </SelectTrigger>
@@ -302,6 +308,7 @@ const EventForm = ({ onSubmit, event }: EventFormProps) => {
                 <SelectItem value="Wolverhampton">Wolverhampton</SelectItem>
               </SelectContent>
             </Select>
+            <input type="hidden" name="qiadat" value={selectedQiadat || ''} />
           </div>
         )}
         <div className="space-y-2">
