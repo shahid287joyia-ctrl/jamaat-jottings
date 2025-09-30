@@ -11,7 +11,14 @@ interface NamazWidgetProps {
 export function NamazWidget({ timings }: NamazWidgetProps) {
   const [expanded, setExpanded] = useState(false);
 
-  const today = new Date().toISOString().split('T')[0];
+  const toLocalDateKey = (d: Date) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const today = toLocalDateKey(new Date());
   const todayTiming = timings.find(t => t.date === today);
 
   const getWeekTimings = () => {
@@ -24,7 +31,7 @@ export function NamazWidget({ timings }: NamazWidgetProps) {
     for (let i = 0; i < 7; i++) {
       const date = new Date(startOfWeek);
       date.setDate(startOfWeek.getDate() + i);
-      weekDates.push(date.toISOString().split('T')[0]);
+      weekDates.push(toLocalDateKey(date));
     }
 
     return weekDates.map(date => 
@@ -52,7 +59,8 @@ export function NamazWidget({ timings }: NamazWidgetProps) {
   };
 
   const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const date = new Date(y, (m || 1) - 1, d || 1);
     return date.toLocaleDateString('en-GB', {
       weekday: 'short',
       day: 'numeric',
@@ -73,7 +81,7 @@ export function NamazWidget({ timings }: NamazWidgetProps) {
 
   return (
     <div className="mx-4 bg-card border border-divider/50 rounded-xl shadow-card overflow-hidden">
-      <div className="bg-gradient-primary text-primary-foreground p-4">
+      <div className="bg-gradient-primary text-primary-foreground p-4" role="region" aria-label="Namaz timings">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-semibold text-lg">
