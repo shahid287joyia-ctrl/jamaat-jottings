@@ -61,6 +61,9 @@ export function EventCard({ event, onEventClick }: EventCardProps) {
           <div className="flex flex-wrap gap-2">
             <Badge variant={getAuxiliaryBadgeVariant(event.auxiliary)}>{event.auxiliary}</Badge>
             <Badge variant="scope">{event.scope}</Badge>
+            {event.scope === 'Local' && event.qiadat && (
+              <Badge variant="outline">{event.qiadat}</Badge>
+            )}
             {event.is_sports && <Badge variant="sports">Sports</Badge>}
           </div>
           <h3 className="font-semibold text-lg text-foreground leading-tight">

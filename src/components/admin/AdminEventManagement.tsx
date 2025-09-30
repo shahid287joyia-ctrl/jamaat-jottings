@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Badge } from '@/components/ui/badge';
 import { getAuxiliaryBadgeVariant } from '@/utils/auxiliaryColors';
 import { Plus, Edit, Trash2, Calendar } from 'lucide-react';
-import { Event, Auxiliary, Scope, AdminRole } from '@/types/events';
+import { Event, Auxiliary, Scope, AdminRole, Qiadat } from '@/types/events';
 
 export const AdminEventManagement = () => {
   const { data: events = [], isLoading } = useEvents();
@@ -41,10 +41,12 @@ export const AdminEventManagement = () => {
       return;
     }
     
+    const scope = formData.get('scope') as Scope;
     const eventData = {
       title: formData.get('title') as string,
       auxiliary: formData.get('auxiliary') as Auxiliary,
-      scope: formData.get('scope') as Scope,
+      scope,
+      qiadat: scope === 'Local' ? (formData.get('qiadat') as Qiadat) : undefined,
       is_sports: formData.get('is_sports') === 'on',
       start_date: formData.get('start_date') as string,
       start_time: formData.get('start_time') as string || undefined,
@@ -68,11 +70,13 @@ export const AdminEventManagement = () => {
 
     const formData = new FormData(e.currentTarget);
     
+    const scope = formData.get('scope') as Scope;
     const eventData = {
       id: selectedEvent.id,
       title: formData.get('title') as string,
       auxiliary: formData.get('auxiliary') as Auxiliary,
-      scope: formData.get('scope') as Scope,
+      scope,
+      qiadat: scope === 'Local' ? (formData.get('qiadat') as Qiadat) : undefined,
       is_sports: formData.get('is_sports') === 'on',
       start_date: formData.get('start_date') as string,
       start_time: formData.get('start_time') as string || undefined,
@@ -157,6 +161,9 @@ export const AdminEventManagement = () => {
                           {event.auxiliary}
                         </Badge>
                         <Badge variant="outline">{event.scope}</Badge>
+                        {event.scope === 'Local' && event.qiadat && (
+                          <Badge variant="outline">{event.qiadat}</Badge>
+                        )}
                         {event.is_sports && <Badge variant="secondary">Sports</Badge>}
                       </div>
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -218,6 +225,8 @@ interface EventFormProps {
 }
 
 const EventForm = ({ onSubmit, event }: EventFormProps) => {
+  const [selectedScope, setSelectedScope] = useState<Scope | undefined>(event?.scope);
+
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
@@ -243,7 +252,7 @@ const EventForm = ({ onSubmit, event }: EventFormProps) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className={`grid gap-4 ${selectedScope === 'Local' ? 'grid-cols-2' : 'grid-cols-3'}`}>
         <div className="space-y-2">
           <Label htmlFor="auxiliary">Auxiliary</Label>
           <Select name="auxiliary" defaultValue={event?.auxiliary} required>
@@ -260,7 +269,12 @@ const EventForm = ({ onSubmit, event }: EventFormProps) => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="scope">Scope</Label>
-          <Select name="scope" defaultValue={event?.scope} required>
+          <Select 
+            name="scope" 
+            defaultValue={event?.scope} 
+            onValueChange={(value) => setSelectedScope(value as Scope)}
+            required
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select scope" />
             </SelectTrigger>
@@ -271,6 +285,25 @@ const EventForm = ({ onSubmit, event }: EventFormProps) => {
             </SelectContent>
           </Select>
         </div>
+        {selectedScope === 'Local' && (
+          <div className="space-y-2">
+            <Label htmlFor="qiadat">Qiadat</Label>
+            <Select name="qiadat" defaultValue={event?.qiadat} required>
+              <SelectTrigger>
+                <SelectValue placeholder="Select qiadat" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Solihull">Solihull</SelectItem>
+                <SelectItem value="South">South</SelectItem>
+                <SelectItem value="West">West</SelectItem>
+                <SelectItem value="Central">Central</SelectItem>
+                <SelectItem value="North">North</SelectItem>
+                <SelectItem value="Walsall">Walsall</SelectItem>
+                <SelectItem value="Wolverhampton">Wolverhampton</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        )}
         <div className="space-y-2">
           <Label htmlFor="created_by_role">Your Role</Label>
           <Select name="created_by_role" defaultValue={event?.created_by_role} required>
@@ -278,10 +311,12 @@ const EventForm = ({ onSubmit, event }: EventFormProps) => {
               <SelectValue placeholder="Select your role" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Sadr">Sadr</SelectItem>
-              <SelectItem value="Murabbi">Murabbi</SelectItem>
-              <SelectItem value="Qaid">Qaid</SelectItem>
               <SelectItem value="Mosque Manager">Mosque Manager</SelectItem>
+              <SelectItem value="Local Nazim">Local Nazim</SelectItem>
+              <SelectItem value="Qaid">Qaid</SelectItem>
+              <SelectItem value="Sadar Jamaat">Sadar Jamaat</SelectItem>
+              <SelectItem value="Murabbi">Murabbi</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
             </SelectContent>
           </Select>
         </div>
