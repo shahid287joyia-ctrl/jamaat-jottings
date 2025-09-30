@@ -133,6 +133,7 @@ export type Database = {
       profiles: {
         Row: {
           admin_role: Database["public"]["Enums"]["admin_role"]
+          approved: boolean
           created_at: string
           email: string
           full_name: string | null
@@ -142,6 +143,7 @@ export type Database = {
         }
         Insert: {
           admin_role: Database["public"]["Enums"]["admin_role"]
+          approved?: boolean
           created_at?: string
           email: string
           full_name?: string | null
@@ -151,6 +153,7 @@ export type Database = {
         }
         Update: {
           admin_role?: Database["public"]["Enums"]["admin_role"]
+          approved?: boolean
           created_at?: string
           email?: string
           full_name?: string | null

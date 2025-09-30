@@ -3,6 +3,17 @@ import { supabase } from '@/integrations/supabase/client';
 import { Event, NamazTiming } from '@/types/events';
 import { useToast } from '@/components/ui/use-toast';
 
+// Profile type
+export interface UserProfile {
+  id: string;
+  user_id: string;
+  email: string;
+  full_name: string | null;
+  admin_role: string;
+  approved: boolean;
+  created_at: string;
+}
+
 // Events hooks
 export const useEvents = () => {
   return useQuery({
@@ -195,6 +206,103 @@ export const useUpdateNamazTimings = () => {
     onError: (error) => {
       toast({
         title: 'Error Updating Prayer Times',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
+};
+
+// User Profile hooks
+export const useUserProfile = (userId: string | undefined) => {
+  return useQuery({
+    queryKey: ['user-profile', userId],
+    queryFn: async () => {
+      if (!userId) return null;
+      
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', userId)
+        .single();
+      
+      if (error) throw error;
+      return data as UserProfile;
+    },
+    enabled: !!userId,
+  });
+};
+
+export const usePendingUsers = () => {
+  return useQuery({
+    queryKey: ['pending-users'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('approved', false)
+        .order('created_at', { ascending: true });
+      
+      if (error) throw error;
+      return data as UserProfile[];
+    },
+  });
+};
+
+export const useApproveUser = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async (userId: string) => {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ approved: true })
+        .eq('user_id', userId);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pending-users'] });
+      toast({
+        title: 'User Approved',
+        description: 'The user has been successfully approved.',
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: 'Error Approving User',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
+};
+
+export const useRejectUser = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async (userId: string) => {
+      // Delete the user's profile (cascade will handle auth cleanup)
+      const { error } = await supabase
+        .from('profiles')
+        .delete()
+        .eq('user_id', userId);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pending-users'] });
+      toast({
+        title: 'User Rejected',
+        description: 'The user has been rejected and removed.',
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: 'Error Rejecting User',
         description: error.message,
         variant: 'destructive',
       });
