@@ -14,7 +14,144 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      events: {
+        Row: {
+          all_day: boolean
+          auxiliary: Database["public"]["Enums"]["auxiliary"]
+          created_at: string
+          created_by: string
+          created_by_role: Database["public"]["Enums"]["admin_role"]
+          description: string | null
+          end_date: string | null
+          end_time: string | null
+          id: string
+          is_sports: boolean
+          location: string
+          recurrence_rule: string | null
+          scope: Database["public"]["Enums"]["scope"]
+          start_date: string
+          start_time: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          all_day?: boolean
+          auxiliary: Database["public"]["Enums"]["auxiliary"]
+          created_at?: string
+          created_by: string
+          created_by_role: Database["public"]["Enums"]["admin_role"]
+          description?: string | null
+          end_date?: string | null
+          end_time?: string | null
+          id?: string
+          is_sports?: boolean
+          location: string
+          recurrence_rule?: string | null
+          scope: Database["public"]["Enums"]["scope"]
+          start_date: string
+          start_time?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          all_day?: boolean
+          auxiliary?: Database["public"]["Enums"]["auxiliary"]
+          created_at?: string
+          created_by?: string
+          created_by_role?: Database["public"]["Enums"]["admin_role"]
+          description?: string | null
+          end_date?: string | null
+          end_time?: string | null
+          id?: string
+          is_sports?: boolean
+          location?: string
+          recurrence_rule?: string | null
+          scope?: Database["public"]["Enums"]["scope"]
+          start_date?: string
+          start_time?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      namaz_timings: {
+        Row: {
+          asr: string
+          created_at: string
+          date: string
+          fajr: string
+          id: string
+          isha: string
+          jumuah_1: string | null
+          jumuah_2: string | null
+          maghrib: string
+          notes: string | null
+          updated_at: string
+          updated_by: string | null
+          zuhr: string
+        }
+        Insert: {
+          asr: string
+          created_at?: string
+          date: string
+          fajr: string
+          id?: string
+          isha: string
+          jumuah_1?: string | null
+          jumuah_2?: string | null
+          maghrib: string
+          notes?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          zuhr: string
+        }
+        Update: {
+          asr?: string
+          created_at?: string
+          date?: string
+          fajr?: string
+          id?: string
+          isha?: string
+          jumuah_1?: string | null
+          jumuah_2?: string | null
+          maghrib?: string
+          notes?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          zuhr?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          admin_role: Database["public"]["Enums"]["admin_role"]
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_role: Database["public"]["Enums"]["admin_role"]
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_role?: Database["public"]["Enums"]["admin_role"]
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +160,9 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      admin_role: "Sadr" | "Murabbi" | "Qaid" | "Mosque Manager"
+      auxiliary: "Atfal" | "Khuddam" | "Lajna" | "Ansar"
+      scope: "Local" | "Regional" | "National"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +289,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      admin_role: ["Sadr", "Murabbi", "Qaid", "Mosque Manager"],
+      auxiliary: ["Atfal", "Khuddam", "Lajna", "Ansar"],
+      scope: ["Local", "Regional", "National"],
+    },
   },
 } as const
