@@ -40,9 +40,8 @@ const Index = () => {
       <header className="bg-gradient-primary text-primary-foreground border-b border-divider/20 px-4 py-8 shadow-elevated relative">
         <div className="max-w-2xl mx-auto">
           <div className="text-center space-y-3">
-            <h1 className="text-3xl font-bold font-arabic">دار البركات</h1>
-            <h2 className="text-2xl font-semibold">Darul Barkaat</h2>
-            <p className="text-primary-foreground/90 text-lg">Mosque Events Calendar</p>
+            <h1 className="text-3xl font-bold">West Midlands Mosque</h1>
+            <p className="text-primary-foreground/90 text-lg">Events Calendar</p>
             <div className="w-16 h-1 bg-primary-foreground/30 rounded-full mx-auto"></div>
           </div>
         </div>
@@ -113,7 +112,7 @@ const Index = () => {
       <footer className="bg-surface-subtle border-t border-divider mt-12 py-6">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <p className="text-sm text-text-subtle">
-            Darul Barkaat Mosque, Birmingham
+            West Midlands Mosque, Birmingham
           </p>
           <p className="text-xs text-text-subtle mt-1">
             Event times in Europe/London timezone

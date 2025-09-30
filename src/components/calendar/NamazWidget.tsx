@@ -87,7 +87,7 @@ export function NamazWidget({ timings }: NamazWidgetProps) {
             <h3 className="font-semibold text-lg">
               {expanded ? "This Week's Namaz Timings" : "Today's Namaz Timings"}
             </h3>
-            <p className="text-xs text-primary-foreground/80">Darul Barkaat (Europe/London)</p>
+            <p className="text-xs text-primary-foreground/80">West Midlands Mosque (Europe/London)</p>
           </div>
           <Button
             variant="ghost"

@@ -37,7 +37,7 @@ export function EventDetailModal({ event, open, onClose }: EventDetailModalProps
 
   const getDisplayLocation = () => {
     if (event.scope === 'Local' || event.scope === 'Regional') {
-      return 'Darul Barkaat, Birmingham';
+      return 'West Midlands Mosque, Birmingham';
     }
     return event.location;
   };
@@ -55,9 +55,9 @@ export function EventDetailModal({ event, open, onClose }: EventDetailModalProps
     const icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//Darul Barkaat//Calendar//EN',
+      'PRODID:-//West Midlands Mosque//Calendar//EN',
       'BEGIN:VEVENT',
-      `UID:${event.id}@darulbarkaat.org`,
+      `UID:${event.id}@westmidlandsmosque.org`,
       `DTSTART:${formatICSDate(startDateTime)}`,
       `DTEND:${formatICSDate(endDateTime)}`,
       `SUMMARY:${event.title}`,

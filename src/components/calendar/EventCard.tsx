@@ -34,7 +34,7 @@ export function EventCard({ event, onEventClick }: EventCardProps) {
 
   const getDisplayLocation = () => {
     if (event.scope === 'Local' || event.scope === 'Regional') {
-      return 'Darul Barkaat';
+      return 'West Midlands Mosque';
     }
     return event.location;
   };
